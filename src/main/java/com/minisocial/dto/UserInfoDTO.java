@@ -13,8 +13,6 @@ public class UserInfoDTO {
         this.role = role;
         this.id = id;
     }
-
-    // Getters and Setters
     public String getEmail() {
         return email;
     }

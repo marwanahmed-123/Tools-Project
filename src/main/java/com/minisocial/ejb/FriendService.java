@@ -1,5 +1,4 @@
 package com.minisocial.ejb;
-
 import com.minisocial.dto.FriendRequestDTO;
 import com.minisocial.dto.UserInfoDTO;
 import com.minisocial.entity.FriendRequest;
@@ -8,12 +7,9 @@ import com.minisocial.entity.User;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-// com/minisocial/ejb/FriendService.java
 @Stateless
 public class FriendService {
     @PersistenceContext
@@ -119,7 +115,6 @@ public class FriendService {
                 .setParameter("userId", userId)
                 .setParameter("status", RequestStatus.ACCEPTED)
                 .getResultList();
-
         return acceptedRequests.stream()
                 .map(fr -> {
                     User otherUser;

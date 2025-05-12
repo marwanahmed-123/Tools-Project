@@ -11,8 +11,6 @@ public class UserDTO {
     private String name;
     private String bio;
     private String role;
-
-    // Getters and Setters
     public String getEmail() {
         return email;
     }

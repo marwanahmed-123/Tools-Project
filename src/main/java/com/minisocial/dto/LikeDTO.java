@@ -2,8 +2,6 @@ package com.minisocial.dto;
 
 public class LikeDTO {
     private Long postId;
-
-    // Getters and setters
     public Long getPostId() {
         return postId;
     }

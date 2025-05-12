@@ -15,4 +15,10 @@ public class FriendResponseDTO {
     public List<FriendRequestDTO> getRequests() {
         return requests;
     }
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    public void setRequests(List<FriendRequestDTO> requests) {
+        this.requests = requests;
+    }
 }

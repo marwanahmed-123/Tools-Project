@@ -3,8 +3,6 @@ package com.minisocial.dto;
 public class PostDTO {
     private String content;
     private String imageUrl;
-
-    // Getters and setters
     public String getContent() {
         return content;
     }

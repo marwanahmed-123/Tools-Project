@@ -1,27 +1,19 @@
 package com.minisocial.entity;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "likes")
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
     private LocalDateTime createdAt;
-
-    // Getters and setters
     public Like() {
     }
     public Like(User user, Post post) {

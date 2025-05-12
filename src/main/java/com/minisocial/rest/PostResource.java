@@ -1,5 +1,4 @@
 package com.minisocial.rest;
-
 import com.minisocial.dto.CommentDTO;
 import com.minisocial.dto.CommentInfoDTO;
 import com.minisocial.dto.PostDTO;
@@ -10,9 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-
 import java.util.List;
-
 @Path("/posts")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -124,8 +121,6 @@ public class PostResource {
         postService.addComment(postId, dto, userId);
         return Response.status(Response.Status.CREATED).entity("{\"message\": \"Comment added\"}").build();
     }
-    // com/minisocial/rest/PostResource.java
-
     @GET
     @Path("/{postId}/comments")
     @Produces(MediaType.APPLICATION_JSON)

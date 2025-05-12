@@ -23,14 +23,13 @@ public class UserService {
     public User registerUser(UserDTO dto) {
         User user = new User();
         user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword()); // Consider hashing later
+        user.setPassword(dto.getPassword());
         user.setName(dto.getName());
         user.setBio(dto.getBio());
         user.setRole(User.Role.valueOf(dto.getRole().toUpperCase()));
         em.persist(user);
         return user;
     }
-
     public User findByEmail(String email) {
         try {
             return em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
@@ -44,12 +43,10 @@ public class UserService {
     public User updateProfile(Long userId, UpdateProfileDTO dto) {
         User user = em.find(User.class, userId);
         if (user == null) return null;
-
         if (dto.getName() != null) user.setName(dto.getName());
         if (dto.getBio() != null) user.setBio(dto.getBio());
         if (dto.getEmail() != null) user.setEmail(dto.getEmail());
         if (dto.getPassword() != null) user.setPassword(dto.getPassword());
-
         return em.merge(user);
     }
     public List<UserInfoDTO> getAllUsers() {
@@ -64,7 +61,6 @@ public class UserService {
                         u.getId()))
                 .collect(toList());
     }
-
     public User findUserById(Long userId) {
         User user = em.find(User.class, userId);
         if (user == null) {

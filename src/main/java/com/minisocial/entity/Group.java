@@ -52,7 +52,7 @@ public class Group {
     public boolean isOpen() {
         return isOpen;
     }
-    public void setOpen(boolean open) {
+    public void setIsOpen(boolean open) {
         isOpen = open;
     }
     public LocalDateTime getCreatedAt() {
@@ -60,13 +60,5 @@ public class Group {
     }
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-    public Group() {}
-    public Group(String name, String description, User admin, boolean isOpen) {
-        this.name = name;
-        this.description = description;
-        this.admin = admin;
-        this.isOpen = isOpen;
-        this.createdAt = LocalDateTime.now();
     }
 }

@@ -1,28 +1,20 @@
 package com.minisocial.entity;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-
-// com/minisocial/entity/FriendRequest.java
 @Entity
 @Table(name = "friend_requests")
 public class FriendRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "sender_id")
     private User sender;
-
     @ManyToOne
     @JoinColumn(name = "receiver_id")
     private User receiver;
-
     @Enumerated(EnumType.STRING)
     private RequestStatus status; // PENDING, ACCEPTED, REJECTED
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     public Long getId() {
@@ -61,5 +53,4 @@ public class FriendRequest {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }

@@ -2,39 +2,37 @@ package com.minisocial.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "group_posts")
+public class GroupPosts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
+    private User author;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
     private String content;
     private String imageUrl;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    public Post() {
-    }
-    public Post(User user, String content, String imageUrl) {
-        this.user = user;
-        this.content = content;
-        this.imageUrl = imageUrl;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-    public Long getId() {
+    public Long getId(){
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public User getUser() {
-        return user;
+    public User getAuthor(){
+        return author;
     }
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+    public Group getGroup() {
+        return group;
+    }
+    public void setGroup(Group group) {
+        this.group = group;
     }
     public String getContent() {
         return content;
@@ -51,13 +49,7 @@ public class Post {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setCreatedAt(LocalDateTime now) {
-        this.createdAt = now;
-    }
-    public void setUpdatedAt(LocalDateTime now) {
-        this.updatedAt = now;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

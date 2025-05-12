@@ -5,8 +5,6 @@ public class UpdateProfileDTO {
     private String bio;
     private String email;
     private String password;
-
-    // Getters and Setters
     public String getName() {
         return name;
     }
