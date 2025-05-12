@@ -36,6 +36,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>3.0-rc2</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,8 +1,6 @@
 package com.minisocial.rest;
 
-import com.minisocial.dto.LoginDTO;
-import com.minisocial.dto.UpdateProfileDTO;
-import com.minisocial.dto.UserDTO;
+import com.minisocial.dto.*;
 import com.minisocial.ejb.UserService;
 import com.minisocial.entity.User;
 import jakarta.inject.Inject;
@@ -14,6 +12,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +39,7 @@ public class UserResource {
         }
         // Store user in session
         request.getSession().setAttribute("userId", user.getId());
-        return Response.ok("{\"message\": \"Login successful.\"}").build();
+        return Response.ok("{\"message\": \"Login successful.\", \"token\": \"FAKE-JWT-TOKEN\"}").build();
     }
     @POST
     @Path("/logout")
@@ -50,6 +49,12 @@ public class UserResource {
             session.invalidate(); //destroy session
         }
         return Response.ok("{\"message\": \"Logged out successfully.\"}").build();
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUsers() {
+        List<UserInfoDTO> users = userService.getAllUsers();
+        return Response.ok(users).build();
     }
     @PUT
     @Path("/{userId}/update")

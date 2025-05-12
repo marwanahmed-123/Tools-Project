@@ -1,5 +1,6 @@
 package com.minisocial.ejb;
 
+import com.minisocial.dto.UserInfoDTO;
 import com.minisocial.entity.User;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -7,6 +8,11 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import com.minisocial.dto.UpdateProfileDTO;
 import com.minisocial.dto.UserDTO;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 @Stateless
 public class UserService {
 
@@ -34,7 +40,6 @@ public class UserService {
             return null;
         }
     }
-
     @Transactional
     public User updateProfile(Long userId, UpdateProfileDTO dto) {
         User user = em.find(User.class, userId);
@@ -46,5 +51,25 @@ public class UserService {
         if (dto.getPassword() != null) user.setPassword(dto.getPassword());
 
         return em.merge(user);
+    }
+    public List<UserInfoDTO> getAllUsers() {
+        return em.createQuery("SELECT u FROM User u", User.class)
+                .getResultList()
+                .stream()
+                .map(u -> new UserInfoDTO(
+                        u.getEmail(),
+                        u.getName(),
+                        u.getBio(),
+                        u.getRole().toString(),
+                        u.getId()))
+                .collect(toList());
+    }
+
+    public User findUserById(Long userId) {
+        User user = em.find(User.class, userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+        return user;
     }
 }
