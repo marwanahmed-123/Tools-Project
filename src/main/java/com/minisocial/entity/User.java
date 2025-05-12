@@ -25,7 +25,6 @@ public class User {
     public enum Role {
         USER, ADMIN
     }
-
     // Getters and Setters
     public Long getId() {
         return id;

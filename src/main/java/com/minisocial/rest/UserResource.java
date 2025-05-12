@@ -1,6 +1,7 @@
 package com.minisocial.rest;
 
 import com.minisocial.dto.*;
+import com.minisocial.ejb.FriendService;
 import com.minisocial.ejb.UserService;
 import com.minisocial.entity.User;
 import jakarta.inject.Inject;
@@ -20,7 +21,8 @@ public class UserResource {
 
     @Inject
     UserService userService;
-
+    @Inject
+    FriendService friendService;
     @POST
     @Path("/register")
     public Response register(@Valid UserDTO dto) {
@@ -80,4 +82,18 @@ public class UserResource {
             }
             return Response.ok("{\"message\": \"Profile updated successfully.\"}").build();
         }
+    @GET
+    @Path("/friends")
+    public Response getFriends(@Context HttpServletRequest request) {
+        Long userId = (Long) request.getSession(false).getAttribute("userId");
+        if (userId == null) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("{\"error\": \"Not logged in.\"}")
+                    .build();
+        }
+
+        List<UserInfoDTO> friends = friendService.getFriends(userId);
+        return Response.ok(friends).build();
+    }
+
 }
